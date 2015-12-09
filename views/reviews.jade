@@ -1,0 +1,12 @@
+extends _shared
+
+block body
+	.reviews
+		h2 Customer reviews
+
+		//- Implement search here
+
+		for review in reviews
+			blockquote
+				p= review.content
+				footer= review.source
