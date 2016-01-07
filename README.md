@@ -1,6 +1,6 @@
 # furiosa-autos
 
-Welcome to the Saltside Web code challenge! Please follow the instructions below in detail and submit your project when you're satisfied with the results.
+Welcome to the Saltside Web code challenge! Please read and follow the instructions below in detail and submit your project when you're satisfied with the results.
 
 ## Project
 
@@ -59,19 +59,19 @@ Example:
 
 __All of the tasks must be solved without any client-side JS and without changing `api.js`__
 
-[Bootstrap 3](http://getbootstrap.com/css/) is available in the project and you may use it to style any components, but visuals are secondary to functionality. We are looking for working software, not a good looking UI.
+[Bootstrap 3](http://getbootstrap.com/css/) is available in the project and you may use it to style any components, but visuals are secondary to functionality. We are looking for working software, not a good looking UI. __However, your solution must be accessible from the provided UI.__
 
 ### What we're looking for
 When we evaluate your solution we are primarily looking for the following qualities:
 * Functionality - A working solution.
-* Code cleanliness - An understandable solution.
+* Code cleanliness and quality - An understandable solution.
 
 We are not looking for:
-* A visually appealing solution - styling doesn't matter.
+* A visually appealing solution - styling is not important, but try to avoid regressions in styling.
 
 ### Task 1 - Implement the `/models` endpoint
 * Implement the models endpoint. Use the provided `api` object to retrieve mock data from the api with the `fetchModels()` function. Render a list of models.
-* Make alphabetic sorting possible (ascending, descending, none).
+* Make alphabetic sorting possible (ascending, descending, none) by adding a UI component.
 
 ### Task 2 - Implement the `/services` endpoint
 * Implement the `services` endpoint. Use the provided `api` object to retrieve mock data from the api with the `fetchServices()` function. Render a list of provided services.

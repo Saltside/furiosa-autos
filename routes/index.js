@@ -8,9 +8,8 @@ router.get('/', function(req, res, next) {
 });
 
 /*
-Task 1:
-	* Implement models endpoint
-	* Make models alphabetically sortable (ascending, descending, default)
+* Task 1:
+* Make models alphabetically sortable (ascending, descending, default)
 */
 router.get('/models', function(req, res, next) {
 	// use api to get models and render output
@@ -18,8 +17,8 @@ router.get('/models', function(req, res, next) {
 });
 
 /*
-Task 2:
-	* Make services filterable by type (repair, maintenance, cosmetic)
+* Task 2:
+* Make services filterable by type (repair, maintenance, cosmetic)
 */
 router.get('/services', function(req, res, next) {
 	// use api to get services and render output
@@ -27,9 +26,9 @@ router.get('/services', function(req, res, next) {
 });
 
 /*
-Task 3:
-	Bugfix: Something prevents reviews from being rendered
-	Make reviews searchable (content and source)
+* Task 3:
+* Bugfix: Something prevents reviews from being rendered
+* Make reviews searchable (content and source)
 */
 router.get('/reviews', function(req, res, next) {
 	return Promise.all([api.fetchCustomerReviews(), api.fetchCorporateReviews()])
