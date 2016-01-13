@@ -18,7 +18,7 @@ You do not need to do any styling to solve the tasks, but if you do so - change 
 A fake, [promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise)-based, API is provided in through `lib/api`.
 __This file may not be changed in your solution!__
 
-The fake api contains these functions. All of them are promise-based and returns a promise that will resolve with the data listed below.
+The fake api contains the following functions. All of them are promise-based and returns a promise that will resolve with the data listed below.
 
 `fetchModels()` - an array of strings representing car models.
 
