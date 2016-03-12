@@ -13,7 +13,8 @@ router.get('/', function(req, res, next) {
 */
 router.get('/models', function(req, res, next) {
 	// use api to get models and render output
-	res.render('models');
+	var models = api.fetchModels()
+	res.render('models', {models: models._result});
 });
 
 /*
