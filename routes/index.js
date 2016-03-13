@@ -1,4 +1,5 @@
 var express = require('express');
+var _ = require('lodash');
 var router = express.Router();
 var api = require('../lib/api');
 
@@ -30,7 +31,24 @@ router.get('/models/:sortable', function(req, res, next) {
 */
 router.get('/services', function(req, res, next) {
 	// use api to get services and render output
-	res.render('services');
+	var services = api.fetchServices()
+	res.render('services', {services: services._result});
+});
+router.get('/services/:type', function(req, res, next) {
+	// use api to get services and render output
+	var services = api.fetchServices()
+
+	var uniqueTypes = _.uniq(_.map(services._result, function(service){
+		return service.type;
+	}));
+
+	var fileteredServices = _.map(services._result, function(service){
+		return service.type === req.params.type ? service: false;
+	});
+
+	console.log(fileteredServices)
+
+	res.render('services', {services: fileteredServices, uniqueTypes: uniqueTypes});
 });
 
 /*

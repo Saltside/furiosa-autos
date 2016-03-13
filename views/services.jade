@@ -5,6 +5,11 @@ block body
 		h2 Services we provide
 
 		//- Implement filtering here
+		for type in uniqueTypes
+			ul.nav.nav-pills
+					li
+						a(href='/services/'+type)= type
+
 
 		for service in services
 			h4= service.job
