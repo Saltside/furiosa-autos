@@ -59,7 +59,9 @@ router.get('/services/:type', function(req, res, next) {
 router.get('/reviews', function(req, res, next) {
 	return Promise.all([api.fetchCustomerReviews(), api.fetchCorporateReviews()])
 		.then(function(reviews) {
-			res.render('reviews', {reviews: reviews});
+			var customerReviews = reviews[0];
+			var corporateReviews = reviews[1];
+			res.render('reviews', {customerReviews: customerReviews, corporateReviews: corporateReviews});
 		});
 });
 

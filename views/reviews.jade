@@ -5,8 +5,14 @@ block body
 		h2 Customer reviews
 
 		//- Implement search here
+		for review in customerReviews
+			blockquote
+				p= review.content
+				footer= review.source
 
-		for review in reviews
+
+		h2 Corporate reviews
+		for review in corporateReviews
 			blockquote
 				p= review.content
 				footer= review.source
