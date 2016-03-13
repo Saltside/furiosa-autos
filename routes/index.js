@@ -48,6 +48,9 @@ var renderServices = function(req, res, next) {
 				fileteredServices = _.map(services, function(service){
 					return service.type === req.params.type ? service: false;
 				});
+				fileteredServices = _.filter(fileteredServices, function(service){
+					return service !== false;
+				});
 			}
 			res.render('services', {services: fileteredServices, uniqueTypes: uniqueTypes});
 		});
