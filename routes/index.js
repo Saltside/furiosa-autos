@@ -11,10 +11,17 @@ router.get('/', function(req, res, next) {
 * Task 1:
 * Make models alphabetically sortable (ascending, descending, default)
 */
-router.get('/models', function(req, res, next) {
+//TODO find a wat to combine these rules
+router.get('/models/', function(req, res, next) {
 	// use api to get models and render output
 	var models = api.fetchModels()
-	res.render('models', {models: models._result});
+	res.render('models', {models: models._result, sort:'default'});
+});
+
+router.get('/models/:sortable', function(req, res, next) {
+	// use api to get models and render output
+	var models = api.fetchModels()
+	res.render('models', {models: models._result, sort:req.params.sortable});
 });
 
 /*
