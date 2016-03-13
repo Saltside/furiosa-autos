@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "lessc public/stylesheets/style.less public/stylesheets/style.css && nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -13,6 +13,7 @@
     "express": "~4.13.1",
     "jade": "~1.11.0",
     "less-middleware": "1.0.x",
+    "lodash": "^4.6.1",
     "morgan": "~1.6.1",
     "nodemon": "~1.8.1",
     "serve-favicon": "~2.3.0"
