@@ -4,15 +4,19 @@ block body
 	.services
 		h2 Services we provide
 
-		//- Implement filtering here
-		for type in uniqueTypes
+		div.filter-holder.well
+			p Filter by type:
+			a.clear-filter(href='/services/') clear
 			ul.nav.nav-pills
+				for type in uniqueTypes
 					li
 						a(href='/services/'+type)= type
 
-
-		for service in services
-			h4= service.job
-			p= service.cost
-			p= service.type
+		div.row
+			for service in services
+				div.col-xs-12.col-md-6.service
+					div.row
+						h4.col-xs-8= service.job
+						p.col-xs-4.cost= service.cost
+						p.type= service.type
 
