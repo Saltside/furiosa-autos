@@ -2,22 +2,23 @@ extends _shared
 
 block body
 	.models
-		
+
+		div.filter-holder.well
+			p Sort:
+			a.clear-filter(href='/models/') clear
+			ul.nav.nav-pills
+					li
+						a(href='/models/ascending') Ascending
+					li
+						a(href='/models/descending') Descending
+
 		case sort 
 			when 'ascending'
 				- models =  models.sort();
 			when 'descending'
 				- models =  models.sort().reverse();
 
-
-		.filters
-			ul.nav.nav-pills
-					li
-						a(href='/models/ascending') Ascending
-					li
-						a(href='/models/descending') Descending
-					li
-						a(href='/models') Clear
-
-		for model in models
-			h4= model
+		div.row
+			for model in models
+				div.col-xs-12.col-sm-4
+					h4.center= model
