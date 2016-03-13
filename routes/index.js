@@ -12,43 +12,52 @@ router.get('/', function(req, res, next) {
 * Task 1:
 * Make models alphabetically sortable (ascending, descending, default)
 */
-//TODO find a wat to combine these rules
+var renderModels = function(req, res, next) {
+	return Promise.resolve(api.fetchModels())
+	.then(function(models){
+		var sortable = req.params.sortable || 'default';
+
+		res.render('models', {models: models, sort:sortable});
+	});
+}
+
 router.get('/models/', function(req, res, next) {
-	// use api to get models and render output
-	var models = api.fetchModels()
-	res.render('models', {models: models._result, sort:'default'});
+	renderModels(req, res, next);
 });
 
 router.get('/models/:sortable', function(req, res, next) {
 	// use api to get models and render output
-	var models = api.fetchModels()
-	res.render('models', {models: models._result, sort:req.params.sortable});
+	renderModels(req, res, next);
 });
 
 /*
 * Task 2:
 * Make services filterable by type (repair, maintenance, cosmetic)
 */
+var renderServices = function(req, res, next) {
+	return Promise.resolve(api.fetchServices())
+		.then(function(services){
+
+			var uniqueTypes = _.uniq(_.map(services, function(service){
+				return service.type;
+			}));
+
+			var fileteredServices = services;
+
+			if(!!req.params.type) {
+				fileteredServices = _.map(services, function(service){
+					return service.type === req.params.type ? service: false;
+				});
+			}
+			res.render('services', {services: fileteredServices, uniqueTypes: uniqueTypes});
+		});
+}
+
 router.get('/services', function(req, res, next) {
-	// use api to get services and render output
-	var services = api.fetchServices()
-	res.render('services', {services: services._result});
+	renderServices(req, res, next);
 });
-router.get('/services/:type', function(req, res, next) {
-	// use api to get services and render output
-	var services = api.fetchServices()
-
-	var uniqueTypes = _.uniq(_.map(services._result, function(service){
-		return service.type;
-	}));
-
-	var fileteredServices = _.map(services._result, function(service){
-		return service.type === req.params.type ? service: false;
-	});
-
-	console.log(fileteredServices)
-
-	res.render('services', {services: fileteredServices, uniqueTypes: uniqueTypes});
+router.get('/services/:type', function(req, res, next){
+	renderServices(req, res, next);
 });
 
 /*
