@@ -3,28 +3,32 @@ extends _shared
 block body
 	.reviews
 		
-		.search-filter
+		div.filter-holder.well
 			form(action='/reviews')
-				input(type='text', placeholder='search term', name='q', value=data.searchTerm)
-				input(type='submit', value='Search')
-		a.clear-filter(href='/reviews') Clear 
+				input.col-xs-12(type='text', placeholder='search term', name='q', value=data.searchTerm)
+			p.pull-left.help-text press enter to search	
+			a.pull-right(href='/reviews') Clear 
+			div.clearfix
 
-		if(!!data.customer.reviews)
-			h2 Customer reviews
-			for custReview in data.customer.reviews
-				blockquote
-					p= custReview.content
-					footer= custReview.source
-			if(data.customer.reviews.length==0 && data.searchFilter)
-				h4 No customer reviews match your search
+		div.row
+			if(!!data.customer.reviews)
+				div.col-xs-12.col-md-6
+					h2 Customer reviews
+					for custReview in data.customer.reviews
+						blockquote
+							p= custReview.content
+							footer= custReview.source
+					if(data.customer.reviews.length==0 && data.searchFilter)
+						h4 No customer reviews match your search
 
-		if(!!data.corporate.reviews)
-			h2 Corporate reviews
-			for custReview in data.corporate.reviews
-				blockquote
-					p= custReview.content
-					footer= custReview.source
-			if(data.corporate.reviews.length==0 && data.searchFilter)
-				h4 No customer reviews match your search		
+			if(!!data.corporate.reviews)
+				div.col-xs-12.col-md-6
+					h2 Corporate reviews
+					for custReview in data.corporate.reviews
+						blockquote
+							p= custReview.content
+							footer= custReview.source
+					if(data.corporate.reviews.length==0 && data.searchFilter)
+						h4 No customer reviews match your search		
 
 
