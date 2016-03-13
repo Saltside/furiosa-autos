@@ -2,17 +2,29 @@ extends _shared
 
 block body
 	.reviews
-		h2 Customer reviews
+		
+		.search-filter
+			form(action='/reviews')
+				input(type='text', placeholder='search term', name='q', value=data.searchTerm)
+				input(type='submit', value='Search')
+		a.clear-filter(href='/reviews') Clear 
 
-		//- Implement search here
-		for review in customerReviews
-			blockquote
-				p= review.content
-				footer= review.source
+		if(!!data.customer.reviews)
+			h2 Customer reviews
+			for custReview in data.customer.reviews
+				blockquote
+					p= custReview.content
+					footer= custReview.source
+			if(data.customer.reviews.length==0 && data.searchFilter)
+				h4 No customer reviews match your search
+
+		if(!!data.corporate.reviews)
+			h2 Corporate reviews
+			for custReview in data.corporate.reviews
+				blockquote
+					p= custReview.content
+					footer= custReview.source
+			if(data.corporate.reviews.length==0 && data.searchFilter)
+				h4 No customer reviews match your search		
 
 
-		h2 Corporate reviews
-		for review in corporateReviews
-			blockquote
-				p= review.content
-				footer= review.source

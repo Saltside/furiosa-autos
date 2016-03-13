@@ -65,13 +65,52 @@ router.get('/services/:type', function(req, res, next){
 * Bugfix: Something prevents reviews from being rendered
 * Make reviews searchable (content and source)
 */
-router.get('/reviews', function(req, res, next) {
+var renderReviews = function(req, res, next) {
 	return Promise.all([api.fetchCustomerReviews(), api.fetchCorporateReviews()])
 		.then(function(reviews) {
-			var customerReviews = reviews[0];
-			var corporateReviews = reviews[1];
-			res.render('reviews', {customerReviews: customerReviews, corporateReviews: corporateReviews});
+
+			var reviewModel = {
+				searchFilter: false,
+				customer: {
+					reviews: reviews[0]
+				},
+				corporate: {
+					reviews: reviews[1]
+				}
+			}
+
+			if(!!req.query.q) {
+				reviewModel.searchFilter = true;
+				reviewModel.searchTerm = req.query.q;
+				var query = req.query.q.toLowerCase();
+
+				//TODO clean this
+				reviewModel.customer['reviews'] = _.map(reviewModel.customer.reviews, function(review){
+					return review.content.toLowerCase().indexOf(query)>0 || review.source.toLowerCase().indexOf(query)>0 ? review : false;
+				});
+				reviewModel.customer['reviews'] = _.filter(reviewModel.customer.reviews, function(review) {
+					return review !== false;
+				});
+
+
+				//TODO clean this
+				reviewModel.corporate['reviews'] = _.map(reviewModel.corporate.reviews, function(review){
+					return review.content.toLowerCase().indexOf(query)>0 || review.source.toLowerCase().indexOf(query)>0 ? review : false;
+				});
+				reviewModel.corporate['reviews'] = _.filter(reviewModel.corporate.reviews, function(review) {
+					return review !== false;
+				});
+
+			}
+
+			console.log(reviewModel);
+			res.render('reviews', {data: reviewModel});
 		});
+}
+
+router.get('/reviews', function(req, res, next) {
+	renderReviews(req, res, next);
 });
+
 
 module.exports = router;
