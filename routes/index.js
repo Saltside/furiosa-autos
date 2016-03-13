@@ -14,11 +14,10 @@ router.get('/', function(req, res, next) {
 */
 var renderModels = function(req, res, next) {
 	return Promise.resolve(api.fetchModels())
-	.then(function(){
+	.then(function(models){
 		var sortable = req.params.sortable || 'default';
-		var models = api.fetchModels()
 
-		res.render('models', {models: models._result, sort:sortable});
+		res.render('models', {models: models, sort:sortable});
 	});
 }
 
