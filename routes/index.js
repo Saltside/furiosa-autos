@@ -30,7 +30,8 @@ router.get('/models/:sortable', function(req, res, next) {
 */
 router.get('/services', function(req, res, next) {
 	// use api to get services and render output
-	res.render('services');
+	var services = api.fetchServices()
+	res.render('services', {services: services._result});
 });
 
 /*
