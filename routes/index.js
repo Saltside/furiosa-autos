@@ -86,7 +86,7 @@ var renderReviews = function(req, res, next) {
 
 				//TODO clean this
 				reviewModel.customer['reviews'] = _.map(reviewModel.customer.reviews, function(review){
-					return review.content.toLowerCase().indexOf(query)>0 || review.source.toLowerCase().indexOf(query)>0 ? review : false;
+					return review.content.toLowerCase().indexOf(query)>=0 || review.source.toLowerCase().indexOf(query)>=0 ? review : false;
 				});
 				reviewModel.customer['reviews'] = _.filter(reviewModel.customer.reviews, function(review) {
 					return review !== false;
@@ -95,7 +95,7 @@ var renderReviews = function(req, res, next) {
 
 				//TODO clean this
 				reviewModel.corporate['reviews'] = _.map(reviewModel.corporate.reviews, function(review){
-					return review.content.toLowerCase().indexOf(query)>0 || review.source.toLowerCase().indexOf(query)>0 ? review : false;
+					return review.content.toLowerCase().indexOf(query)>=0 || review.source.toLowerCase().indexOf(query)>=0 ? review : false;
 				});
 				reviewModel.corporate['reviews'] = _.filter(reviewModel.corporate.reviews, function(review) {
 					return review !== false;
