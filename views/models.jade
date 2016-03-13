@@ -2,9 +2,22 @@ extends _shared
 
 block body
 	.models
-		h2 Models we work on
+		
+		case sort 
+			when 'ascending'
+				- models =  models.sort();
+			when 'descending'
+				- models =  models.sort().reverse();
 
-		//- Implement sorting here
+
+		.filters
+			ul.nav.nav-pills
+					li
+						a(href='/models/ascending') Ascending
+					li
+						a(href='/models/descending') Descending
+					li
+						a(href='/models') Clear
 
 		for model in models
 			h4= model
